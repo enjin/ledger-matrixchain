@@ -36,13 +36,13 @@ static const char *secret_message =
         "recovery mode. Activating this\n"
         "mode will temporarily allow\n"
         "you to sign transactions\n"
-        "using Enjin Blockchain keys.";
+        "using Polkadot keys.";
 #else
 static const char *secret_message =
         "USE AT YOUR OWN RISK!! "
         "You are about to enable the ENJ recovery mode."
         "If you are not sure why you are here, reject or unplug your device immediately."
-        "Activating this mode will temporarily allow you to sign transactions using Enjin Blockchain keys";
+        "Activating this mode will temporarily allow you to sign transactions using Polkadot keys";
 #endif
 
 zxerr_t secret_getNumItems(uint8_t *num_items) {

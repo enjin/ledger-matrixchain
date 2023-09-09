@@ -44,14 +44,14 @@ $(info ************ FULL PARSER ENABLED ************)
 endif
 
 ifndef COIN
-COIN=ENJ
+COIN=MATRIX
 endif
 
 include $(CURDIR)/Makefile.version
 
 $(info COIN  = [$(COIN)])
 
-ifeq ($(COIN),ENJ)
+ifeq ($(COIN),MATRIX)
 # Main app configuration
 DEFINES += APP_STANDARD
 ifneq ($(TARGET_NAME),TARGET_NANOS)
@@ -60,7 +60,7 @@ endif
 APPNAME = "Enjin Matrix"
 APPPATH = "44'/1155'" --path "44'/354'"
 
-else ifeq ($(COIN),ENJ_XL)
+else ifeq ($(COIN),MATRIX_XL)
 # XL app configuration
 DEFINES += APP_STANDARD SUBSTRATE_PARSER_FULL
 APPNAME = "Enjin Matrix XL"
@@ -118,9 +118,9 @@ dep/%.d: %.c Makefile
 .PHONY: listvariants
 listvariants:
 ifeq ($(TARGET_NAME),TARGET_NANOS)
-	@echo VARIANTS COIN ENJ ENJ_XL
+	@echo VARIANTS COIN MATRIX MATRIX_XL
 else
-	@echo VARIANTS COIN ENJ
+	@echo VARIANTS COIN MATRIX
 endif
 
 .PHONY: version

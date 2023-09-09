@@ -60,7 +60,7 @@ typedef enum {
 #define COIN_AMOUNT_DECIMAL_PLACES 18
 
 #define COIN_GENESIS_HASH "123cb2660ec45d5fc0326ff93447a704f651fa35f00ccb4694429047aca6400a"
-#define COIN_NAME "Enjin Coin"
+#define COIN_NAME "Enjin Matrix"
 #define COIN_TICKER "ENJ "
 
 #define COIN_SECRET_REQUIRED_CLICKS 10
