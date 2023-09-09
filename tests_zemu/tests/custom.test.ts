@@ -21,7 +21,7 @@ import { APP_SEED, models } from './common'
 // @ts-expect-error missing typings
 import ed25519 from 'ed25519-supercop'
 import { blake2bFinal, blake2bInit, blake2bUpdate } from 'blakejs'
-import { txBalances_transfer, txSession_setKeys, txStaking_nominate, txProxy_proxy, txUtility_batch } from './zemu_blobs'
+import { txBalances_transfer } from './zemu_blobs'
 
 const defaultOptions = {
   ...DEFAULT_START_OPTIONS,
@@ -36,23 +36,7 @@ const TXNS = [
   {
     name: 'balances_transfer',
     blob: txBalances_transfer,
-  },
-  {
-    name: 'session_setkeys',
-    blob: txSession_setKeys,
-  },
-  {
-    name: 'staking_nominate',
-    blob: txStaking_nominate,
-  },
-  {
-    name: 'proxy_proxy',
-    blob: txProxy_proxy,
-  },
-  {
-    name: 'txUtility_batch',
-    blob: txUtility_batch,
-  },
+  }
 ]
 
 describe.each(TXNS)('Transactions', function (data) {

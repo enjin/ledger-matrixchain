@@ -57,13 +57,13 @@ DEFINES += APP_STANDARD
 ifneq ($(TARGET_NAME),TARGET_NANOS)
 DEFINES += SUBSTRATE_PARSER_FULL
 endif
-APPNAME = "Enjin Matrixchain"
+APPNAME = "Enjin Matrix"
 APPPATH = "44'/1155'" --path "44'/354'"
 
 else ifeq ($(COIN),ENJ_XL)
 # XL app configuration
 DEFINES += APP_STANDARD SUBSTRATE_PARSER_FULL
-APPNAME = "Enjin Matrixchain XL"
+APPNAME = "Enjin Matrix XL"
 APPPATH = "44'/1155'" --path "44'/354'"
 
 else

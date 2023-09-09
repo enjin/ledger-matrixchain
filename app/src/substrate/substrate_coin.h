@@ -65,10 +65,10 @@ typedef enum {
 
 #define COIN_SECRET_REQUIRED_CLICKS 10
 
-#define MENU_MAIN_APP_LINE1 "Enjin Matrixchain"
+#define MENU_MAIN_APP_LINE1 "Enjin Matrix"
 #define MENU_MAIN_APP_LINE2 "Ready"
 #define MENU_MAIN_APP_LINE2_SECRET "ENJ RECOVERY"
-#define APPVERSION_LINE1 "Enjin Matrixchain"
+#define APPVERSION_LINE1 "Enjin Matrix"
 #define APPVERSION_LINE2 "v" APPVERSION
 
 #ifdef __cplusplus
