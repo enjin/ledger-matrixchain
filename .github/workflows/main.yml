@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
     branches:
-      - main
+      - master
       - develop
 
 jobs:
@@ -119,7 +119,7 @@ jobs:
 
   build_package_nanos:
     needs: [configure, build, build_ledger, test_zemu]
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     container:
       image: zondax/ledger-app-builder:latest
@@ -155,7 +155,7 @@ jobs:
 
   build_package_nanos_xl:
     needs: [configure, build, build_ledger, test_zemu]
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     container:
       image: zondax/ledger-app-builder:latest
@@ -191,7 +191,7 @@ jobs:
 
   build_package_nanosp:
     needs: [configure, build, build_ledger, test_zemu]
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     container:
       image: zondax/ledger-app-builder:latest
@@ -227,7 +227,7 @@ jobs:
 
   build_package_stax:
     needs: [configure, build, build_ledger, test_zemu]
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     container:
       image: zondax/ledger-app-builder:latest
