@@ -35,8 +35,8 @@ const defaultOptions = {
 }
 
 const CHAIN = 'Matrixchain'
-const expected_address = 'efT9ZtgxwzqXRdRKNJiMbySdsZ7ZfUZyhH45jg8fHG1MYt2b9'
-const expected_pk = 'b0eab5dffb19c225c010b61a7f3b6838bb462f70936298a4943711287d2596c9'
+const expected_address = 'efTanLm8pFbtaHqK91UQUFUGmt1wBFiMmjT8UbD3e7XnnRLgX'
+const expected_pk = 'c425c11ded5cea2ad1ef200f3bbbd6ad8bee69a62b468e905d35e78f0469e106'
 
 jest.setTimeout(180000)
 
