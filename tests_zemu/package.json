@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@zondax/ledger-substrate": "^0.41.2",
-    "@zondax/zemu": "git+https://github.com/leonardocustodio/zemu.git#update-lock"
+    "@zondax/zemu": "^0.44.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",
