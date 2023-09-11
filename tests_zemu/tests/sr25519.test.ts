@@ -15,7 +15,7 @@
  ******************************************************************************* */
 
 import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
-import { newPolkadotApp } from '@zondax/ledger-substrate'
+import { newSubstrateApp } from '@zondax/ledger-substrate'
 import { APP_SEED } from './common'
 import { txBalances_transfer } from './zemu_blobs'
 
@@ -34,6 +34,7 @@ const defaultOptions = {
   X11: false,
 }
 
+const CHAIN = 'Matrixchain'
 const expected_address = '1b8tiTYdzk8hZ6W65ppiGPA5TnYBAnoRDSoyxyVbj1DZENm'
 const expected_pk = '1a08e8cba45e59c761ebe72133da0b7f4de8ce6a263690b07e3bd56dcc8d2226'
 
@@ -44,7 +45,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), CHAIN)
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000, false, 1)
 
@@ -64,7 +65,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions, model: 'nanos' })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), CHAIN)
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
@@ -88,7 +89,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), CHAIN)
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
@@ -109,7 +110,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), CHAIN)
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -150,7 +151,7 @@ describe('SR25519', function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
-      const app = newPolkadotApp(sim.getTransport())
+      const app = newSubstrateApp(sim.getTransport(), CHAIN)
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
