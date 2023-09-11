@@ -11,6 +11,12 @@ on:
 jobs:
   analyse:
     name: Analyse
+
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: read
+    
     strategy:
       matrix:
         sdk: ["$NANOS_SDK", "$NANOX_SDK", "$NANOSP_SDK", "$STAX_SDK"]
