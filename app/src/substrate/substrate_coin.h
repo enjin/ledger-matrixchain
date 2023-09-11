@@ -20,7 +20,7 @@ extern "C" {
 #endif
 
 #define COIN_ADDR_TYPE 1110
-#define CLA 0xef
+#define CLA 0xba
 
 #define INS_SIGN_RAW 0x03
 
