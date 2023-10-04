@@ -31,9 +31,8 @@ parser_error_t _readMethod_V3(parser_context_t* c, uint8_t moduleIdx, uint8_t ca
 const char* _getMethod_ModuleName_V3(uint8_t moduleIdx);
 
 const char* _getMethod_Name_V3(uint8_t moduleIdx, uint8_t callIdx);
-
+const char* _getMethod_Name_V3_ParserFull(uint16_t callPrivIdx);
 const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx);
-
 uint8_t _getMethod_NumItems_V3(uint8_t moduleIdx, uint8_t callIdx);
 
 parser_error_t _getMethod_ItemValue_V3(
@@ -42,7 +41,6 @@ parser_error_t _getMethod_ItemValue_V3(
     uint8_t pageIdx, uint8_t* pageCount);
 
 bool _getMethod_ItemIsExpert_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx);
-bool _getMethod_IsNestingSupported_V3(uint8_t moduleIdx, uint8_t callIdx);
 
 #ifdef __cplusplus
 }

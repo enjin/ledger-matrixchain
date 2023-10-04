@@ -21,6 +21,7 @@ extern "C" {
 
 // Modules names
 static const char* STR_MO_BALANCES = "Balances";
+static const char* STR_MO_MULTITOKENS = "Multitokens";
 
 // Methods names
 static const char* STR_ME_TRANSFER = "Transfer";
@@ -28,7 +29,42 @@ static const char* STR_ME_FORCE_TRANSFER = "Force transfer";
 static const char* STR_ME_TRANSFER_ALLOW_DEATH = "Transfer allow death";
 static const char* STR_ME_TRANSFER_KEEP_ALIVE = "Transfer keep alive";
 static const char* STR_ME_TRANSFER_ALL = "Transfer all";
+static const char* STR_ME_FORCE_UNRESERVE = "Force unreserve";
+static const char* STR_ME_UPGRADE_ACCOUNTS = "Upgrade accounts";
 static const char* STR_ME_FORCE_SET_BALANCE = "Force set balance";
+static const char* STR_ME_CREATE_COLLECTION = "Create collection";
+static const char* STR_ME_DESTROY_COLLECTION = "Destroy collection";
+static const char* STR_ME_MUTATE_COLLECTION = "Mutate collection";
+static const char* STR_ME_MUTATE_TOKEN = "Mutate token";
+static const char* STR_ME_MINT = "Mint";
+static const char* STR_ME_BURN = "Burn";
+static const char* STR_ME_FREEZE = "Freeze";
+static const char* STR_ME_THAW = "Thaw";
+static const char* STR_ME_SET_ATTRIBUTE = "Set attribute";
+static const char* STR_ME_REMOVE_ATTRIBUTE = "Remove attribute";
+static const char* STR_ME_REMOVE_ALL_ATTRIBUTES = "Remove all attributes";
+static const char* STR_ME_BATCH_TRANSFER = "Batch transfer";
+static const char* STR_ME_BATCH_MINT = "Batch mint";
+static const char* STR_ME_BATCH_SET_ATTRIBUTE = "Batch set attribute";
+static const char* STR_ME_APPROVE_COLLECTION = "Approve collection";
+static const char* STR_ME_UNAPPROVE_COLLECTION = "Unapprove collection";
+static const char* STR_ME_APPROVE_TOKEN = "Approve token";
+static const char* STR_ME_UNAPPROVE_TOKEN = "Unapprove token";
+static const char* STR_ME_FORCE_MUTATE_COLLECTION = "Force mutate collection";
+static const char* STR_ME_FORCE_SET_COLLECTION = "Force set collection";
+static const char* STR_ME_FORCE_SET_TOKEN = "Force set token";
+static const char* STR_ME_FORCE_SET_ATTRIBUTE = "Force set attribute";
+static const char* STR_ME_FORCE_SET_COLLECTION_ACCOUNT = "Force set collection account";
+static const char* STR_ME_FORCE_SET_TOKEN_ACCOUNT = "Force set token account";
+static const char* STR_ME_FORCE_CREATE_COLLECTION = "Force create collection";
+static const char* STR_ME_FORCE_MINT = "Force mint";
+static const char* STR_ME_FORCE_BURN = "Force burn";
+static const char* STR_ME_FORCE_APPROVE_COLLECTION = "Force approve collection";
+static const char* STR_ME_FORCE_FREEZE = "Force freeze";
+static const char* STR_ME_FORCE_SET_NEXT_COLLECTION_ID = "Force set next collection id";
+static const char* STR_ME_CLAIM_COLLECTIONS = "Claim collections";
+static const char* STR_ME_CLAIM_TOKENS = "Claim tokens";
+
 static const char* STR_ME_UNLOCK = "Unlock";
 static const char* STR_ME_EXECUTE = "Execute";
 static const char* STR_ME_CLOSE = "Close";
@@ -180,6 +216,26 @@ static const char* STR_IT_assets = "Assets";
 static const char* STR_IT_fee_asset_item = "Fee asset item";
 static const char* STR_IT_location = "Location";
 static const char* STR_IT_suspended = "Suspended";
+static const char* STR_IT_value = "Value";
+static const char* STR_IT_descriptor = "Descriptor";
+static const char* STR_IT_collection_id = "Collection id";
+static const char* STR_IT_recipient = "Recipient";
+static const char* STR_IT_params = "Params";
+static const char* STR_IT_key = "Key";
+static const char* STR_IT_attribute_count = "Attribute count";
+static const char* STR_IT_attributes = "Attributes";
+static const char* STR_IT_operator = "Operator";
+static const char* STR_IT_expiration = "Expiration";
+static const char* STR_IT_current_amount = "Current amount";
+static const char* STR_IT_destination = "Destination";
+static const char* STR_IT_account_id = "Account id";
+static const char* STR_IT_caller = "Caller";
+static const char* STR_IT_deposit_backer = "Deposit backer";
+static const char* STR_IT_ethereum_address = "Ethereum address";
+static const char* STR_IT_recipients = "Recipients";
+static const char* STR_IT_config = "Config";
+static const char* STR_IT_mutation = "Mutation";
+static const char* STR_IT_token_id = "Token id";
 
 #ifdef __cplusplus
 }
