@@ -23,7 +23,7 @@
 #endif
 
 __Z_INLINE parser_error_t _readMethod_balances_transfer_allow_death_V3(
-    parser_context_t* c, pd_balances_transfer_allow_death_V3_t* m)
+        parser_context_t* c, pd_balances_transfer_allow_death_V3_t* m)
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->dest))
     CHECK_ERROR(_readCompactBalance(c, &m->amount))
@@ -31,7 +31,7 @@ __Z_INLINE parser_error_t _readMethod_balances_transfer_allow_death_V3(
 }
 
 __Z_INLINE parser_error_t _readMethod_balances_force_transfer_V3(
-    parser_context_t* c, pd_balances_force_transfer_V3_t* m)
+        parser_context_t* c, pd_balances_force_transfer_V3_t* m)
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->source))
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->dest))
@@ -40,7 +40,7 @@ __Z_INLINE parser_error_t _readMethod_balances_force_transfer_V3(
 }
 
 __Z_INLINE parser_error_t _readMethod_balances_transfer_keep_alive_V3(
-    parser_context_t* c, pd_balances_transfer_keep_alive_V3_t* m)
+        parser_context_t* c, pd_balances_transfer_keep_alive_V3_t* m)
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->dest))
     CHECK_ERROR(_readCompactBalance(c, &m->amount))
@@ -48,7 +48,7 @@ __Z_INLINE parser_error_t _readMethod_balances_transfer_keep_alive_V3(
 }
 
 __Z_INLINE parser_error_t _readMethod_balances_transfer_all_V3(
-    parser_context_t* c, pd_balances_transfer_all_V3_t* m)
+        parser_context_t* c, pd_balances_transfer_all_V3_t* m)
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->dest))
     CHECK_ERROR(_readbool(c, &m->keep_alive))
@@ -56,10 +56,52 @@ __Z_INLINE parser_error_t _readMethod_balances_transfer_all_V3(
 }
 
 __Z_INLINE parser_error_t _readMethod_balances_transfer_V3(
-    parser_context_t* c, pd_balances_transfer_V3_t* m)
+        parser_context_t* c, pd_balances_transfer_V3_t* m)
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->dest))
     CHECK_ERROR(_readCompactBalance(c, &m->amount))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_marketplace_cancel_listing_V3(
+        parser_context_t* c, pd_marketplace_cancel_listing_V3_t* m)
+{
+    CHECK_ERROR(_readListingIdOf(c, &m->listing_id))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_marketplace_create_listing_V3(
+        parser_context_t* c, pd_marketplace_create_listing_V3_t* m)
+{
+    CHECK_ERROR(_readTokenAssetId(c, &m->make_asset_id))
+    CHECK_ERROR(_readTokenAssetId(c, &m->take_asset_id))
+    CHECK_ERROR(_readCompactu128(c, &m->amount))
+    CHECK_ERROR(_readCompactu128(c, &m->price))
+    CHECK_ERROR(_readBytes(c, &m->salt))
+    CHECK_ERROR(_readOptionAuctionDataOfT(c, &m->auction_data))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_marketplace_fill_listing_V3(
+        parser_context_t* c, pd_marketplace_fill_listing_V3_t* m)
+{
+    CHECK_ERROR(_readListingIdOf(c, &m->listing_id))
+    CHECK_ERROR(_readCompactu128(c, &m->amount))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_marketplace_finalize_auction_V3(
+        parser_context_t* c, pd_marketplace_finalize_auction_V3_t* m)
+{
+    CHECK_ERROR(_readListingIdOf(c, &m->listing_id))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_marketplace_place_bid_V3(
+        parser_context_t* c, pd_marketplace_place_bid_V3_t* m)
+{
+    CHECK_ERROR(_readListingIdOf(c, &m->listing_id))
+    CHECK_ERROR(_readCompactu128(c, &m->price))
     return parser_ok;
 }
 
@@ -219,6 +261,37 @@ __Z_INLINE parser_error_t _readMethod_multitokens_unapprove_token_V3(
 
 #ifdef SUBSTRATE_PARSER_FULL
 #ifndef TARGET_NANOS
+__Z_INLINE parser_error_t _readMethod_marketplace_force_create_listing_V3(
+        parser_context_t* c, pd_marketplace_force_create_listing_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->seller))
+    CHECK_ERROR(_readTokenAssetId(c, &m->make_asset_id))
+    CHECK_ERROR(_readTokenAssetId(c, &m->take_asset_id))
+    CHECK_ERROR(_readCompactu128(c, &m->amount))
+    CHECK_ERROR(_readCompactu128(c, &m->price))
+    CHECK_ERROR(_readBytes(c, &m->salt))
+    CHECK_ERROR(_readOptionAuctionDataOfT(c, &m->auction_data))
+    CHECK_ERROR(_readOptionAccountIdLookupOfT(c, &m->deposit_backer))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_marketplace_force_place_bid_V3(
+        parser_context_t* c, pd_marketplace_force_place_bid_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->bidder))
+    CHECK_ERROR(_readListingIdOf(c, &m->listing_id))
+    CHECK_ERROR(_readCompactu128(c, &m->price))
+    CHECK_ERROR(_readOptionAccountIdLookupOfT(c, &m->funds_backer))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_marketplace_set_protocol_fee_V3(
+        parser_context_t* c, pd_marketplace_set_protocol_fee_V3_t* m)
+{
+    CHECK_ERROR(_readPerbill(c, &m->protocol_fee))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_multitokens_batch_mint_V3(
         parser_context_t* c, pd_multitokens_batch_mint_V3_t* m)
 {
@@ -389,30 +462,45 @@ __Z_INLINE parser_error_t _readMethod_multitokens_force_transfer_V3(
 #endif
 
 parser_error_t _readMethod_V3(
-    parser_context_t* c,
-    uint8_t moduleIdx,
-    uint8_t callIdx,
-    pd_Method_V3_t* method)
+        parser_context_t* c,
+        uint8_t moduleIdx,
+        uint8_t callIdx,
+        pd_Method_V3_t* method)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
 
-    case 2560: /* module 10 call 0 */
+        case 2560: /* module 10 call 0 */
         CHECK_ERROR(_readMethod_balances_transfer_allow_death_V3(c, &method->basic.balances_transfer_allow_death_V3))
-        break;
-    case 2562: /* module 10 call 2 */
+            break;
+        case 2562: /* module 10 call 2 */
         CHECK_ERROR(_readMethod_balances_force_transfer_V3(c, &method->basic.balances_force_transfer_V3))
-        break;
-    case 2563: /* module 10 call 3 */
+            break;
+        case 2563: /* module 10 call 3 */
         CHECK_ERROR(_readMethod_balances_transfer_keep_alive_V3(c, &method->basic.balances_transfer_keep_alive_V3))
-        break;
-    case 2564: /* module 10 call 4 */
+            break;
+        case 2564: /* module 10 call 4 */
         CHECK_ERROR(_readMethod_balances_transfer_all_V3(c, &method->basic.balances_transfer_all_V3))
-        break;
-    case 2567: /* module 10 call 7 */
+            break;
+        case 2567: /* module 10 call 7 */
         CHECK_ERROR(_readMethod_balances_transfer_V3(c, &method->basic.balances_transfer_V3))
-        break;
+            break;
+        case 12800: /* module 50 call 0 */
+        CHECK_ERROR(_readMethod_marketplace_create_listing_V3(c, &method->basic.marketplace_create_listing_V3))
+            break;
+        case 12801: /* module 50 call 1 */
+        CHECK_ERROR(_readMethod_marketplace_cancel_listing_V3(c, &method->basic.marketplace_cancel_listing_V3))
+            break;
+        case 12802: /* module 50 call 2 */
+        CHECK_ERROR(_readMethod_marketplace_fill_listing_V3(c, &method->basic.marketplace_fill_listing_V3))
+            break;
+        case 12803: /* module 50 call 3 */
+        CHECK_ERROR(_readMethod_marketplace_place_bid_V3(c, &method->basic.marketplace_place_bid_V3))
+            break;
+        case 12804: /* module 50 call 4 */
+        CHECK_ERROR(_readMethod_marketplace_finalize_auction_V3(c, &method->basic.marketplace_finalize_auction_V3))
+            break;
         case 64768: /* module 253 call 0 */
         CHECK_ERROR(_readMethod_multitokens_create_collection_V3(c, &method->basic.multitokens_create_collection_V3))
             break;
@@ -469,6 +557,15 @@ parser_error_t _readMethod_V3(
             break;
 #ifdef SUBSTRATE_PARSER_FULL
 #ifndef TARGET_NANOS
+        case 12805: /* module 50 call 5 */
+        CHECK_ERROR(_readMethod_marketplace_set_protocol_fee_V3(c, &method->basic.marketplace_set_protocol_fee_V3))
+            break;
+        case 12806: /* module 50 call 6 */
+        CHECK_ERROR(_readMethod_marketplace_force_create_listing_V3(c, &method->basic.marketplace_force_create_listing_V3))
+            break;
+        case 12807: /* module 50 call 7 */
+        CHECK_ERROR(_readMethod_marketplace_force_place_bid_V3(c, &method->basic.marketplace_force_place_bid_V3))
+            break;
         case 64771: /* module 253 call 3 */
         CHECK_ERROR(_readMethod_multitokens_mutate_token_V3(c, &method->basic.multitokens_mutate_token_V3))
             break;
@@ -531,8 +628,8 @@ parser_error_t _readMethod_V3(
             break;
 #endif
 #endif
-    default:
-        return parser_unexpected_callIndex;
+        default:
+            return parser_unexpected_callIndex;
     }
 
     return parser_ok;
@@ -546,12 +643,14 @@ parser_error_t _readMethod_V3(
 const char* _getMethod_ModuleName_V3(uint8_t moduleIdx)
 {
     switch (moduleIdx) {
-    case 10:
-        return STR_MO_BALANCES;
-    case 253:
-        return STR_MO_MULTITOKENS;
-    default:
-        return NULL;
+        case 10:
+            return STR_MO_BALANCES;
+        case 50:
+            return STR_MO_MARKETPLACE;
+        case 253:
+            return STR_MO_MULTITOKENS;
+        default:
+            return NULL;
     }
 
     return NULL;
@@ -562,16 +661,32 @@ const char* _getMethod_Name_V3(uint8_t moduleIdx, uint8_t callIdx)
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2560: /* module 10 call 0 */
-        return STR_ME_TRANSFER_ALLOW_DEATH;
-    case 2562: /* module 10 call 2 */
-        return STR_ME_FORCE_TRANSFER;
-    case 2563: /* module 10 call 3 */
-        return STR_ME_TRANSFER_KEEP_ALIVE;
-    case 2564: /* module 10 call 4 */
-        return STR_ME_TRANSFER_ALL;
-    case 2567: /* module 10 call 7 */
-        return STR_ME_TRANSFER;
+        case 2560: /* module 10 call 0 */
+            return STR_ME_TRANSFER_ALLOW_DEATH;
+        case 2562: /* module 10 call 2 */
+            return STR_ME_FORCE_TRANSFER;
+        case 2563: /* module 10 call 3 */
+            return STR_ME_TRANSFER_KEEP_ALIVE;
+        case 2564: /* module 10 call 4 */
+            return STR_ME_TRANSFER_ALL;
+        case 2567: /* module 10 call 7 */
+            return STR_ME_TRANSFER;
+        case 12800: /* module 50 call 0 */
+            return STR_ME_CREATE_LISTING;
+        case 12801: /* module 50 call 1 */
+            return STR_ME_CANCEL_LISTING;
+        case 12802: /* module 50 call 2 */
+            return STR_ME_FILL_LISTING;
+        case 12803: /* module 50 call 3 */
+            return STR_ME_PLACE_BID;
+        case 12804: /* module 50 call 4 */
+            return STR_ME_FINALIZE_AUCTION;
+        case 12805: /* module 50 call 5 */
+            return STR_ME_SET_PROTOCOL_FEE;
+        case 12806: /* module 50 call 6 */
+            return STR_ME_FORCE_CREATE_LISTING;
+        case 12807: /* module 50 call 7 */
+            return STR_ME_FORCE_PLACE_BID;
         case 64768: /* module 253 call 0 */
             return STR_ME_CREATE_COLLECTION;
         case 64769: /* module 253 call 1 */
@@ -640,8 +755,8 @@ const char* _getMethod_Name_V3(uint8_t moduleIdx, uint8_t callIdx)
             return STR_ME_CLAIM_COLLECTIONS;
         case 64801: /* module 253 call 33 */
             return STR_ME_CLAIM_TOKENS;
-    default:
-        return _getMethod_Name_V3_ParserFull(callPrivIdx);
+        default:
+            return _getMethod_Name_V3_ParserFull(callPrivIdx);
     }
 
     return NULL;
@@ -671,16 +786,32 @@ uint8_t _getMethod_NumItems_V3(uint8_t moduleIdx, uint8_t callIdx)
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2560: /* module 10 call 0 */
-        return 2;
-    case 2562: /* module 10 call 2 */
-        return 3;
-    case 2563: /* module 10 call 3 */
-        return 2;
-    case 2564: /* module 10 call 4 */
-        return 2;
-    case 2567: /* module 10 call 7 */
-        return 2;
+        case 2560: /* module 10 call 0 */
+            return 2;
+        case 2562: /* module 10 call 2 */
+            return 3;
+        case 2563: /* module 10 call 3 */
+            return 2;
+        case 2564: /* module 10 call 4 */
+            return 2;
+        case 2567: /* module 10 call 7 */
+            return 2;
+        case 12800: /* module 50 call 0 */
+            return 6;
+        case 12801: /* module 50 call 1 */
+            return 1;
+        case 12802: /* module 50 call 2 */
+            return 2;
+        case 12803: /* module 50 call 3 */
+            return 2;
+        case 12804: /* module 50 call 4 */
+            return 1;
+        case 12805: /* module 50 call 5 */
+            return 1;
+        case 12806: /* module 50 call 6 */
+            return 8;
+        case 12807: /* module 50 call 7 */
+            return 4;
         case 64768: /* module 253 call 0 */
             return 1;
         case 64769: /* module 253 call 1 */
@@ -767,53 +898,140 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2560: /* module 10 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_dest;
-        case 1:
-            return STR_IT_amount;
-        default:
-            return NULL;
-        }
-    case 2562: /* module 10 call 2 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_source;
-        case 1:
-            return STR_IT_dest;
-        case 2:
-            return STR_IT_amount;
-        default:
-            return NULL;
-        }
-    case 2563: /* module 10 call 3 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_dest;
-        case 1:
-            return STR_IT_amount;
-        default:
-            return NULL;
-        }
-    case 2564: /* module 10 call 4 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_dest;
-        case 1:
-            return STR_IT_keep_alive;
-        default:
-            return NULL;
-        }
-    case 2567: /* module 10 call 7 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_dest;
-        case 1:
-            return STR_IT_amount;
-        default:
-            return NULL;
-        }
+        case 2560: /* module 10 call 0 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_dest;
+                case 1:
+                    return STR_IT_amount;
+                default:
+                    return NULL;
+            }
+        case 2562: /* module 10 call 2 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_source;
+                case 1:
+                    return STR_IT_dest;
+                case 2:
+                    return STR_IT_amount;
+                default:
+                    return NULL;
+            }
+        case 2563: /* module 10 call 3 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_dest;
+                case 1:
+                    return STR_IT_amount;
+                default:
+                    return NULL;
+            }
+        case 2564: /* module 10 call 4 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_dest;
+                case 1:
+                    return STR_IT_keep_alive;
+                default:
+                    return NULL;
+            }
+        case 2567: /* module 10 call 7 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_dest;
+                case 1:
+                    return STR_IT_amount;
+                default:
+                    return NULL;
+            }
+        case 12800: /* module 50 call 0 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_make_asset_id;
+                case 1:
+                    return STR_IT_take_asset_id;
+                case 2:
+                    return STR_IT_amount;
+                case 3:
+                    return STR_IT_price;
+                case 4:
+                    return STR_IT_salt;
+                case 5:
+                    return STR_IT_auction_data;
+                default:
+                    return NULL;
+            }
+        case 12801: /* module 50 call 1 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_listing_id;
+                default:
+                    return NULL;
+            }
+        case 12802: /* module 50 call 2 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_listing_id;
+                case 1:
+                    return STR_IT_amount;
+                default:
+                    return NULL;
+            }
+        case 12803: /* module 50 call 3 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_listing_id;
+                case 1:
+                    return STR_IT_price;
+                default:
+                    return NULL;
+            }
+        case 12804: /* module 50 call 4 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_listing_id;
+                default:
+                    return NULL;
+            }
+        case 12805: /* module 50 call 5 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_protocol_fee;
+                default:
+                    return NULL;
+            }
+        case 12806: /* module 50 call 6 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_seller;
+                case 1:
+                    return STR_IT_make_asset_id;
+                case 2:
+                    return STR_IT_take_asset_id;
+                case 3:
+                    return STR_IT_amount;
+                case 4:
+                    return STR_IT_price;
+                case 5:
+                    return STR_IT_salt;
+                case 6:
+                    return STR_IT_auction_data;
+                case 7:
+                    return STR_IT_deposit_backer;
+                default:
+                    return NULL;
+            }
+        case 12807: /* module 50 call 7 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_dest;
+                case 1:
+                    return STR_IT_amount;
+                default:
+                    return NULL;
+            }
+            return STR_ME_FORCE_PLACE_BID;
         case 64768: /* module 253 call 0 */
             switch (itemIdx) {
                 case 0:
@@ -1197,102 +1415,267 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
                     return NULL;
             }
 #endif
-    default:
-        return NULL;
+        default:
+            return NULL;
     }
 
     return NULL;
 }
 
 parser_error_t _getMethod_ItemValue_V3(
-    pd_Method_V3_t* m,
-    uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx,
-    char* outValue, uint16_t outValueLen,
-    uint8_t pageIdx, uint8_t* pageCount)
+        pd_Method_V3_t* m,
+        uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx,
+        char* outValue, uint16_t outValueLen,
+        uint8_t pageIdx, uint8_t* pageCount)
 {
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    case 2560: /* module 10 call 0 */
-        switch (itemIdx) {
-        case 0: /* balances_transfer_allow_death_V3 - dest */;
-            return _toStringAccountIdLookupOfT(
-                &m->basic.balances_transfer_allow_death_V3.dest,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* balances_transfer_allow_death_V3 - amount */;
-            return _toStringCompactBalance(
-                &m->basic.balances_transfer_allow_death_V3.amount,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 2562: /* module 10 call 2 */
-        switch (itemIdx) {
-        case 0: /* balances_force_transfer_V3 - source */;
-            return _toStringAccountIdLookupOfT(
-                &m->basic.balances_force_transfer_V3.source,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* balances_force_transfer_V3 - dest */;
-            return _toStringAccountIdLookupOfT(
-                &m->basic.balances_force_transfer_V3.dest,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 2: /* balances_force_transfer_V3 - amount */;
-            return _toStringCompactBalance(
-                &m->basic.balances_force_transfer_V3.amount,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 2563: /* module 10 call 3 */
-        switch (itemIdx) {
-        case 0: /* balances_transfer_keep_alive_V3 - dest */;
-            return _toStringAccountIdLookupOfT(
-                &m->basic.balances_transfer_keep_alive_V3.dest,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* balances_transfer_keep_alive_V3 - amount */;
-            return _toStringCompactBalance(
-                &m->basic.balances_transfer_keep_alive_V3.amount,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 2564: /* module 10 call 4 */
-        switch (itemIdx) {
-        case 0: /* balances_transfer_all_V3 - dest */;
-            return _toStringAccountIdLookupOfT(
-                &m->basic.balances_transfer_all_V3.dest,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* balances_transfer_all_V3 - keep_alive */;
-            return _toStringbool(
-                &m->basic.balances_transfer_all_V3.keep_alive,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 2567: /* module 10 call 7 */
-        switch (itemIdx) {
-        case 0: /* balances_transfer_V3 - dest */;
-            return _toStringAccountIdLookupOfT(
-                &m->basic.balances_transfer_V3.dest,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* balances_transfer_V3 - amount */;
-            return _toStringCompactBalance(
-                &m->basic.balances_transfer_V3.amount,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
+        case 2560: /* module 10 call 0 */
+            switch (itemIdx) {
+                case 0: /* balances_transfer_allow_death_V3 - dest */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.balances_transfer_allow_death_V3.dest,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* balances_transfer_allow_death_V3 - amount */;
+                    return _toStringCompactBalance(
+                            &m->basic.balances_transfer_allow_death_V3.amount,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 2562: /* module 10 call 2 */
+            switch (itemIdx) {
+                case 0: /* balances_force_transfer_V3 - source */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.balances_force_transfer_V3.source,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* balances_force_transfer_V3 - dest */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.balances_force_transfer_V3.dest,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* balances_force_transfer_V3 - amount */;
+                    return _toStringCompactBalance(
+                            &m->basic.balances_force_transfer_V3.amount,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 2563: /* module 10 call 3 */
+            switch (itemIdx) {
+                case 0: /* balances_transfer_keep_alive_V3 - dest */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.balances_transfer_keep_alive_V3.dest,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* balances_transfer_keep_alive_V3 - amount */;
+                    return _toStringCompactBalance(
+                            &m->basic.balances_transfer_keep_alive_V3.amount,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 2564: /* module 10 call 4 */
+            switch (itemIdx) {
+                case 0: /* balances_transfer_all_V3 - dest */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.balances_transfer_all_V3.dest,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* balances_transfer_all_V3 - keep_alive */;
+                    return _toStringbool(
+                            &m->basic.balances_transfer_all_V3.keep_alive,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 2567: /* module 10 call 7 */
+            switch (itemIdx) {
+                case 0: /* balances_transfer_V3 - dest */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.balances_transfer_V3.dest,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* balances_transfer_V3 - amount */;
+                    return _toStringCompactBalance(
+                            &m->basic.balances_transfer_V3.amount,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12800: /* module 50 call 0 */
+            switch (itemIdx) {
+                case 0: /* marketplace_create_listing_V3 - make_asset_id */;
+                    return _toStringTokenAssetId(
+                            &m->basic.marketplace_create_listing_V3.make_asset_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* marketplace_create_listing_V3 - take_asset_id */;
+                    return _toStringTokenAssetId(
+                            &m->basic.marketplace_create_listing_V3.take_asset_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* marketplace_create_listing_V3 - amount */;
+                    return _toStringCompactu128(
+                            &m->basic.marketplace_create_listing_V3.amount,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 3: /* marketplace_create_listing_V3 - price */;
+                    return _toStringCompactu128(
+                            &m->basic.marketplace_create_listing_V3.price,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 4: /* marketplace_create_listing_V3 - salt */;
+                    return _toStringBytes(
+                            &m->basic.marketplace_create_listing_V3.salt,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 5: /* marketplace_create_listing_V3 - auction_data */;
+                    return _toStringOptionAuctionDataOfT(
+                            &m->basic.marketplace_create_listing_V3.auction_data,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12801: /* module 50 call 1 */
+            switch (itemIdx) {
+                case 0: /* marketplace_cancel_listing_V3 - listing_id */;
+                    return _toStringListingId(
+                            &m->basic.marketplace_cancel_listing_V3.listing_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12802: /* module 50 call 2 */
+            switch (itemIdx) {
+                case 0: /* marketplace_fill_listing_V3 - listing_id */;
+                    return _toStringListingId(
+                            &m->basic.marketplace_fill_listing_V3.listing_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* marketplace_fill_listing_V3 - amount */;
+                    return _toStringCompactu128(
+                            &m->basic.marketplace_fill_listing_V3.amount,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12803: /* module 50 call 3 */
+            switch (itemIdx) {
+                case 0: /* marketplace_place_bid_V3 - listing_id */;
+                    return _toStringListingId(
+                            &m->basic.marketplace_place_bid_V3.listing_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* marketplace_place_bid_V3 - price */;
+                    return _toStringCompactu128(
+                            &m->basic.marketplace_place_bid_V3.price,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12804: /* module 50 call 4 */
+            switch (itemIdx) {
+                case 0: /* marketplace_finalize_auction_V3 - listing_id */;
+                    return _toStringListingId(
+                            &m->basic.marketplace_finalize_auction_V3.listing_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12805: /* module 50 call 5 */
+            switch (itemIdx) {
+                case 0: /* marketplace_set_protocol_fee_V3 - protocol_fee */;
+                    return _toStringPerbill(
+                            &m->basic.marketplace_set_protocol_fee_V3.protocol_fee,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12806: /* module 50 call 6 */
+            switch (itemIdx) {
+                case 0: /* marketplace_force_create_listing_V3 - seller */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.marketplace_force_create_listing_V3.seller,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* marketplace_force_create_listing_V3 - make_asset_id */;
+                    return _toStringTokenAssetId(
+                            &m->basic.marketplace_force_create_listing_V3.make_asset_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* marketplace_force_create_listing_V3 - take_asset_id */;
+                    return _toStringTokenAssetId(
+                            &m->basic.marketplace_force_create_listing_V3.take_asset_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 3: /* marketplace_force_create_listing_V3 - amount */;
+                    return _toStringCompactu128(
+                            &m->basic.marketplace_force_create_listing_V3.amount,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 4: /* marketplace_force_create_listing_V3 - price */;
+                    return _toStringCompactu128(
+                            &m->basic.marketplace_force_create_listing_V3.price,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 5: /* marketplace_force_create_listing_V3 - salt */;
+                    return _toStringBytes(
+                            &m->basic.marketplace_force_create_listing_V3.salt,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 6: /* marketplace_force_create_listing_V3 - auction_data */;
+                    return _toStringOptionAuctionDataOfT(
+                            &m->basic.marketplace_force_create_listing_V3.auction_data,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 7: /* marketplace_force_create_listing_V3 - deposit_backer */;
+                    return _toStringOptionAccountIdLookupOfT(
+                            &m->basic.marketplace_force_create_listing_V3.deposit_backer,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 12807: /* module 50 call 7 */
+            switch (itemIdx) {
+                case 0: /* marketplace_force_place_bid_V3 - bidder */;
+                    return _toStringAccountIdLookupOfT(
+                            &m->basic.marketplace_force_place_bid_V3.bidder,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* marketplace_force_place_bid_V3 - listing_id */;
+                    return _toStringListingId(
+                            &m->basic.marketplace_force_place_bid_V3.listing_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* marketplace_force_place_bid_V3 - price */;
+                    return _toStringCompactu128(
+                            &m->basic.marketplace_force_place_bid_V3.price,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 3: /* marketplace_force_place_bid_V3 - funds_backer */;
+                    return _toStringOptionAccountIdLookupOfT(
+                            &m->basic.marketplace_force_place_bid_V3.funds_backer,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
         case 64768: /* module 253 call 0 */
             switch (itemIdx) {
                 case 0: /* multitokens_create_collection_V3 - descriptor */;
@@ -1992,8 +2375,8 @@ parser_error_t _getMethod_ItemValue_V3(
             }
 #endif
 #endif
-    default:
-        return parser_ok;
+        default:
+            return parser_ok;
     }
 
     return parser_ok;
@@ -2004,7 +2387,7 @@ bool _getMethod_ItemIsExpert_V3(uint8_t moduleIdx, uint8_t callIdx, __Z_UNUSED u
     uint16_t callPrivIdx = ((uint16_t)moduleIdx << 8u) + callIdx;
 
     switch (callPrivIdx) {
-    default:
-        return false;
+        default:
+            return false;
     }
 }

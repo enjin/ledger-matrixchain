@@ -101,6 +101,9 @@ parser_error_t _readH256(parser_context_t* c, pd_H256_t* v);
 parser_error_t _readMultiAssetV2(parser_context_t* c, pd_MultiAssetV2_t* v);
 parser_error_t _readMultiAssetV3(parser_context_t* c, pd_MultiAssetV3_t* v);
 parser_error_t _readTokenId(parser_context_t* c, pd_TokenId_t* v);
+parser_error_t _readTokenAssetId(parser_context_t* c, pd_TokenAssetId_t* v);
+parser_error_t _readListingIdOf(parser_context_t* c, pd_ListingIdOfT_t* v);
+parser_error_t _readOptionAuctionDataOfT(parser_context_t* c, pd_OptionAuctionDataOfT_t* v);
 parser_error_t _readTransferParamsOfT(parser_context_t* c, pd_TransferParamsOfT_t* v);
 parser_error_t _readFreezeOf(parser_context_t* c, pd_FreezeOf_t* v);
 parser_error_t _readMintParamsOf(parser_context_t* c, pd_MintParamsOf_t* v);
@@ -1006,6 +1009,27 @@ parser_error_t _toStringOptionTokenId(
 
 parser_error_t _toStringTokenId(
         const pd_TokenId_t* v,
+        char* outValue,
+        uint16_t outValueLen,
+        uint8_t pageIdx,
+        uint8_t* pageCount);
+
+parser_error_t _toStringTokenAssetId(
+        const pd_TokenAssetId_t* v,
+        char* outValue,
+        uint16_t outValueLen,
+        uint8_t pageIdx,
+        uint8_t* pageCount);
+
+parser_error_t _toStringListingId(
+        const pd_ListingIdOfT_t* v,
+        char* outValue,
+        uint16_t outValueLen,
+        uint8_t pageIdx,
+        uint8_t* pageCount);
+
+parser_error_t _toStringOptionAuctionDataOfT(
+        const pd_OptionAuctionDataOfT_t* v,
         char* outValue,
         uint16_t outValueLen,
         uint8_t pageIdx,

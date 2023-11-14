@@ -21,6 +21,7 @@ extern "C" {
 
 // Modules names
 static const char* STR_MO_BALANCES = "Balances";
+static const char* STR_MO_MARKETPLACE = "Marketplace";
 static const char* STR_MO_MULTITOKENS = "Multitokens";
 
 // Methods names
@@ -64,7 +65,14 @@ static const char* STR_ME_FORCE_FREEZE = "Force freeze";
 static const char* STR_ME_FORCE_SET_NEXT_COLLECTION_ID = "Force set next collection id";
 static const char* STR_ME_CLAIM_COLLECTIONS = "Claim collections";
 static const char* STR_ME_CLAIM_TOKENS = "Claim tokens";
-
+static const char* STR_ME_CANCEL_LISTING = "Cancel listing";
+static const char* STR_ME_CREATE_LISTING = "Create listing";
+static const char* STR_ME_FILL_LISTING = "Fill listing";
+static const char* STR_ME_FINALIZE_AUCTION = "Finalize auction";
+static const char* STR_ME_FORCE_CREATE_LISTING = "Force create listing";
+static const char* STR_ME_FORCE_PLACE_BID = "Force place bid";
+static const char* STR_ME_PLACE_BID = "Place bid";
+static const char* STR_ME_SET_PROTOCOL_FEE = "Set protocol fee";
 static const char* STR_ME_UNLOCK = "Unlock";
 static const char* STR_ME_EXECUTE = "Execute";
 static const char* STR_ME_CLOSE = "Close";
@@ -236,6 +244,14 @@ static const char* STR_IT_recipients = "Recipients";
 static const char* STR_IT_config = "Config";
 static const char* STR_IT_mutation = "Mutation";
 static const char* STR_IT_token_id = "Token id";
+static const char* STR_IT_listing_id = "Listing id";
+static const char* STR_IT_protocol_fee = "Protocol fee";
+static const char* STR_IT_seller = "Seller";
+static const char* STR_IT_make_asset_id = "Make asset id";
+static const char* STR_IT_take_asset_id = "Take asset id";
+static const char* STR_IT_price = "Price";
+static const char* STR_IT_salt = "Salt";
+static const char* STR_IT_auction_data = "Auction data";
 
 #ifdef __cplusplus
 }

@@ -980,6 +980,10 @@ typedef struct {
 } pd_TokenAssetId_t;
 
 typedef struct {
+    pd_H256_t value;
+} pd_ListingIdOfT_t;
+
+typedef struct {
     uint64_t _len;
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
@@ -1026,6 +1030,16 @@ typedef struct {
     uint8_t some;
     pd_TokenId_t contained;
 } pd_OptionTokenId_t;
+
+typedef struct {
+    pd_Compactu32_t startBlock;
+    pd_Compactu32_t endBlock;
+} pd_AuctionDataOfT_t;
+
+typedef struct {
+    uint8_t some;
+    pd_AuctionDataOfT_t contained;
+} pd_OptionAuctionDataOfT_t;
 
 typedef struct {
     pd_TokenId_t value;

@@ -962,6 +962,24 @@ parser_error_t _readAccountIdLookupOfT(parser_context_t* c, pd_AccountIdLookupOf
     return parser_ok;
 }
 
+parser_error_t _readAuctionDataOfT(parser_context_t* c, pd_AuctionDataOfT_t* v)
+{
+    CHECK_INPUT()
+    CHECK_ERROR(_readCompactu32(c, &v->startBlock))
+    CHECK_ERROR(_readCompactu32(c, &v->endBlock))
+    return parser_ok;
+}
+
+parser_error_t _readOptionAuctionDataOfT(parser_context_t* c, pd_OptionAuctionDataOfT_t * v)
+{
+    CHECK_INPUT()
+    CHECK_ERROR(_readUInt8(c, &v->some))
+    if (v->some > 0) {
+        CHECK_ERROR(_readAuctionDataOfT(c, &v->contained))
+    }
+    return parser_ok;
+}
+
 parser_error_t _readOptionAccountIdLookupOfT(parser_context_t* c, pd_OptionAccountIdLookupOfT_t* v)
 {
     CHECK_INPUT()
@@ -2166,6 +2184,13 @@ parser_error_t _readTokenAssetId(parser_context_t* c, pd_TokenAssetId_t* v)
     CHECK_INPUT()
     CHECK_ERROR(_readCompactu128(c, &v->collectionId))
     CHECK_ERROR(_readCompactTokenId(c, &v->tokenId))
+    return parser_ok;
+}
+
+parser_error_t _readListingIdOf(parser_context_t* c, pd_ListingIdOfT_t* v)
+{
+    CHECK_INPUT()
+    CHECK_ERROR(_readH256(c, &v->value))
     return parser_ok;
 }
 
@@ -4852,9 +4877,8 @@ parser_error_t _toStringH256(
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    GEN_DEF_TOSTRING_ARRAY(32);
+    uint8_t* pageCount) {
+    GEN_DEF_TOSTRING_ARRAY(32)
 }
 
 parser_error_t _toStringMultiAssetV2(
@@ -7735,6 +7759,75 @@ parser_error_t _toStringCompactTokenId(
     return _toStringCompactu128(&v->value, outValue, outValueLen, pageIdx, pageCount);
 }
 
+parser_error_t _toStringListingId(
+        const pd_ListingIdOfT_t* v,
+        char* outValue,
+        uint16_t outValueLen,
+        uint8_t pageIdx,
+        uint8_t* pageCount)
+{
+    return _toStringH256(&v->value, outValue, outValueLen, pageIdx, pageCount);
+}
+
+parser_error_t _toStringAuctionDataOfT(
+        const pd_AuctionDataOfT_t* v,
+        char* outValue,
+        uint16_t outValueLen,
+        uint8_t pageIdx,
+        uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+
+    // First measure number of pages
+    uint8_t pages[2] = { 0 };
+    CHECK_ERROR(_toStringCompactu32(&v->startBlock, outValue, outValueLen, 0, &pages[0]))
+    CHECK_ERROR(_toStringCompactu32(&v->endBlock, outValue, outValueLen, 0, &pages[1]))
+
+    *pageCount = 0;
+    for (uint8_t i = 0; i < (uint8_t)sizeof(pages); i++) {
+        *pageCount += pages[i];
+    }
+
+    if (pageIdx > *pageCount) {
+        return parser_display_idx_out_of_range;
+    }
+
+    if (pageIdx < pages[0]) {
+        CHECK_ERROR(_toStringCompactu32(&v->startBlock, outValue, outValueLen, pageIdx, &pages[0]))
+        return parser_ok;
+    }
+    pageIdx -= pages[0];
+
+    if (pageIdx < pages[1]) {
+        CHECK_ERROR(_toStringCompactu32(&v->endBlock, outValue, outValueLen, pageIdx, &pages[1]))
+        return parser_ok;
+    }
+
+    return parser_display_idx_out_of_range;
+}
+
+parser_error_t _toStringOptionAuctionDataOfT(
+        const pd_OptionAuctionDataOfT_t* v,
+        char* outValue,
+        uint16_t outValueLen,
+        uint8_t pageIdx,
+        uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+
+    *pageCount = 1;
+    if (v->some > 0) {
+        CHECK_ERROR(_toStringAuctionDataOfT(
+                &v->contained,
+                outValue, outValueLen,
+                pageIdx, pageCount));
+    } else {
+        snprintf(outValue, outValueLen, "None");
+    }
+
+    return parser_ok;
+}
+
 parser_error_t _toStringTokenAssetId(
         const pd_TokenAssetId_t* v,
         char* outValue,
@@ -7779,7 +7872,7 @@ parser_error_t _toStringVecTokenAssetId(
         uint8_t pageIdx,
         uint8_t* pageCount)
 {
-    GEN_DEF_TOSTRING_VECTOR(TokenAssetId);
+    GEN_DEF_TOSTRING_VECTOR(TokenAssetId)
 }
 
 parser_error_t _toStringMintPolicyDescriptor(

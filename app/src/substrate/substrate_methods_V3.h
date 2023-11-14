@@ -31,6 +31,7 @@ extern "C" {
 #endif
 
 #define PD_CALL_BALANCES_V3 10
+#define PD_CALL_MARKETPLACE_V3 50
 #define PD_CALL_MULTITOKENS_V3 253
 
 #define PD_CALL_BALANCES_TRANSFER_ALL_V3 4
@@ -63,6 +64,63 @@ typedef struct {
     pd_AccountIdLookupOfT_t dest;
     pd_CompactBalance_t amount;
 } pd_balances_transfer_V3_t;
+
+#define PD_CALL_MARKETPLACE_CREATE_LISTING_V3 0
+typedef struct {
+    pd_TokenAssetId_t make_asset_id;
+    pd_TokenAssetId_t take_asset_id;
+    pd_Compactu128_t amount;
+    pd_Compactu128_t price;
+    pd_Bytes_t salt;
+    pd_OptionAuctionDataOfT_t auction_data;
+} pd_marketplace_create_listing_V3_t;
+
+#define PD_CALL_MARKETPLACE_CANCEL_LISTING_V3 1
+typedef struct {
+    pd_ListingIdOfT_t listing_id;
+} pd_marketplace_cancel_listing_V3_t;
+
+#define PD_CALL_MARKETPLACE_FILL_LISTING_V3 2
+typedef struct {
+    pd_ListingIdOfT_t listing_id;
+    pd_Compactu128_t amount;
+} pd_marketplace_fill_listing_V3_t;
+
+#define PD_CALL_MARKETPLACE_PLACE_BID_V3 3
+typedef struct {
+    pd_ListingIdOfT_t listing_id;
+    pd_Compactu128_t price;
+} pd_marketplace_place_bid_V3_t;
+
+#define PD_CALL_MARKETPLACE_FINALIZE_AUCTION_V3 4
+typedef struct {
+    pd_ListingIdOfT_t listing_id;
+} pd_marketplace_finalize_auction_V3_t;
+
+#define PD_CALL_MARKETPLACE_SET_PROTOCOL_FEE_V3 5
+typedef struct {
+    pd_Perbill_t protocol_fee;
+} pd_marketplace_set_protocol_fee_V3_t;
+
+#define PD_CALL_MARKETPLACE_FORCE_CREATE_LISTING_V3 6
+typedef struct {
+    pd_AccountIdLookupOfT_t seller;
+    pd_TokenAssetId_t make_asset_id;
+    pd_TokenAssetId_t take_asset_id;
+    pd_Compactu128_t amount;
+    pd_Compactu128_t price;
+    pd_Bytes_t salt;
+    pd_OptionAuctionDataOfT_t auction_data;
+    pd_OptionAccountIdLookupOfT_t deposit_backer;
+} pd_marketplace_force_create_listing_V3_t;
+
+#define PD_CALL_MARKETPLACE_FORCE_PLACE_BID_V3 7
+typedef struct {
+    pd_AccountIdLookupOfT_t bidder;
+    pd_ListingIdOfT_t listing_id;
+    pd_Compactu128_t price;
+    pd_OptionAccountIdLookupOfT_t funds_backer;
+} pd_marketplace_force_place_bid_V3_t;
 
 #define PD_CALL_MULTITOKENS_CREATE_COLLECTION_V3 0
 typedef struct {
@@ -322,6 +380,14 @@ typedef union {
     pd_balances_force_transfer_V3_t balances_force_transfer_V3;
     pd_balances_transfer_keep_alive_V3_t balances_transfer_keep_alive_V3;
     pd_balances_transfer_V3_t balances_transfer_V3;
+    pd_marketplace_cancel_listing_V3_t marketplace_cancel_listing_V3;
+    pd_marketplace_create_listing_V3_t marketplace_create_listing_V3;
+    pd_marketplace_fill_listing_V3_t marketplace_fill_listing_V3;
+    pd_marketplace_place_bid_V3_t marketplace_place_bid_V3;
+    pd_marketplace_finalize_auction_V3_t marketplace_finalize_auction_V3;
+    pd_marketplace_set_protocol_fee_V3_t marketplace_set_protocol_fee_V3;
+    pd_marketplace_force_create_listing_V3_t marketplace_force_create_listing_V3;
+    pd_marketplace_force_place_bid_V3_t marketplace_force_place_bid_V3;
     pd_multitokens_create_collection_V3_t multitokens_create_collection_V3;
     pd_multitokens_destroy_collection_V3_t multitokens_destroy_collection_V3;
     pd_multitokens_mutate_collection_V3_t multitokens_mutate_collection_V3;
