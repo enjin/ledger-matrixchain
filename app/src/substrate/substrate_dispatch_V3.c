@@ -63,6 +63,143 @@ __Z_INLINE parser_error_t _readMethod_balances_transfer_V3(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_fueltanks_add_account_V3(
+        parser_context_t* c, pd_fueltanks_add_acount_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->user_id))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_batch_add_account_V3(
+        parser_context_t* c, pd_fueltanks_batch_add_account_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readVecAccountIdLookupOfT(c, &m->user_ids))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_batch_remove_account_V3(
+        parser_context_t* c, pd_fueltanks_batch_remove_account_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readVecAccountIdLookupOfT(c, &m->user_ids))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_create_fuel_tank_V3(
+        parser_context_t* c, pd_fueltanks_create_fuel_tank_V3_t* m)
+{
+    CHECK_ERROR(_readFuelTankDescriptorOf(c, &m->descriptor))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_destroy_fuel_tank_V3(
+        parser_context_t* c, pd_fueltanks_destroy_fuel_tank_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_dispatch_V3(
+        parser_context_t* c, pd_fueltanks_dispatch_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readu32(c, &m->rule_set_id))
+    CHECK_ERROR(_readCall(c, &m->call))
+    CHECK_ERROR(_readOptionDispatchSettings(c, &m->settings))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_dispatch_and_touch_V3(
+        parser_context_t* c, pd_fueltanks_dispatch_and_touch_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readu32(c, &m->rule_set_id))
+    CHECK_ERROR(_readCall(c, &m->call))
+    CHECK_ERROR(_readOptionDispatchSettings(c, &m->settings))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_force_batch_add_account_V3(
+        parser_context_t* c, pd_fueltanks_force_batch_add_account_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->owner))
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readVecAccountIdLookupOfT(c, &m->user_ids))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_force_create_fuel_tank_V3(
+        parser_context_t* c, pd_fueltanks_force_create_fuel_tank_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->owner))
+    CHECK_ERROR(_readFuelTankDescriptorOf(c, &m->descriptor))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_force_set_consumption_V3(
+        parser_context_t* c, pd_fueltanks_force_set_consumption_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readOptionAccountIdLookupOfT(c, &m->user_id))
+    CHECK_ERROR(_readu32(c, &m->rule_set_id))
+    CHECK_ERROR(_readConsumptionOf(c, &m->consumption))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_insert_rule_set_V3(
+        parser_context_t* c, pd_fueltanks_insert_rule_set_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readu32(c, &m->rule_set_id))
+    CHECK_ERROR(_readVecRuleDescriptorsOf(c, &m->rules))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_mutate_fuel_tank_V3(
+        parser_context_t* c, pd_fueltanks_mutate_fuel_tank_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readDefaultTankMutation(c, &m->mutation))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_remove_account_V3(
+        parser_context_t* c, pd_fueltanks_remove_account_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->user_id))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_remove_account_rule_data_V3(
+        parser_context_t* c, pd_fueltanks_remove_account_rule_data_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->user_id))
+    CHECK_ERROR(_readu32(c, &m->rule_set_id))
+    CHECK_ERROR(_readDispatchRuleKind(c, &m->rule_kind))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_remove_rule_set_V3(
+        parser_context_t* c, pd_fueltanks_remove_rule_set_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readu32(c, &m->rule_set_id))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_fueltanks_schedule_mutate_freeze_state_V3(
+        parser_context_t* c, pd_fueltanks_schedule_mutate_freeze_state_V3_t* m)
+{
+    CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
+    CHECK_ERROR(_readOptionu32(c, &m->rule_set_id))
+    CHECK_ERROR(_readbool(c, &m->is_frozen))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_marketplace_cancel_listing_V3(
         parser_context_t* c, pd_marketplace_cancel_listing_V3_t* m)
 {
@@ -501,6 +638,54 @@ parser_error_t _readMethod_V3(
         case 12804: /* module 50 call 4 */
         CHECK_ERROR(_readMethod_marketplace_finalize_auction_V3(c, &method->basic.marketplace_finalize_auction_V3))
             break;
+        case 13824: /* module 54 call 0 */
+        CHECK_ERROR(_readMethod_fueltanks_create_fuel_tank_V3(c, &method->basic.fueltanks_create_fuel_tank_V3))
+            break;
+        case 13825: /* module 54 call 1 */
+        CHECK_ERROR(_readMethod_fueltanks_mutate_fuel_tank_V3(c, &method->basic.fueltanks_mutate_fuel_tank_V3))
+            break;
+        case 13826: /* module 54 call 2 */
+        CHECK_ERROR(_readMethod_fueltanks_add_account_V3(c, &method->basic.fueltanks_add_account_V3))
+            break;
+        case 13827: /* module 54 call 3 */
+        CHECK_ERROR(_readMethod_fueltanks_remove_account_V3(c, &method->basic.fueltanks_remove_account_V3))
+            break;
+        case 13828: /* module 54 call 4 */
+        CHECK_ERROR(_readMethod_fueltanks_remove_account_rule_data_V3(c, &method->basic.fueltanks_remove_account_rule_data_V3))
+            break;
+        case 13829: /* module 54 call 5 */
+        CHECK_ERROR(_readMethod_fueltanks_dispatch_V3(c, &method->basic.fueltanks_dispatch_V3))
+            break;
+        case 13830: /* module 54 call 6 */
+        CHECK_ERROR(_readMethod_fueltanks_dispatch_and_touch_V3(c, &method->basic.fueltanks_dispatch_and_touch_V3))
+            break;
+        case 13831: /* module 54 call 7 */
+        CHECK_ERROR(_readMethod_fueltanks_schedule_mutate_freeze_state_V3(c, &method->basic.fueltanks_schedule_mutate_freeze_state_V3))
+            break;
+        case 13832: /* module 54 call 8 */
+        CHECK_ERROR(_readMethod_fueltanks_insert_rule_set_V3(c, &method->basic.fueltanks_insert_rule_set_V3))
+            break;
+        case 13833: /* module 54 call 9 */
+        CHECK_ERROR(_readMethod_fueltanks_remove_rule_set_V3(c, &method->basic.fueltanks_remove_rule_set_V3))
+            break;
+        case 13834: /* module 54 call 10 */
+        CHECK_ERROR(_readMethod_fueltanks_batch_add_account_V3(c, &method->basic.fueltanks_batch_add_account_V3))
+            break;
+        case 13835: /* module 54 call 11 */
+        CHECK_ERROR(_readMethod_fueltanks_batch_remove_account_V3(c, &method->basic.fueltanks_batch_remove_account_V3))
+            break;
+        case 13836: /* module 54 call 12 */
+        CHECK_ERROR(_readMethod_fueltanks_force_set_consumption_V3(c, &method->basic.fueltanks_force_set_consumption_V3))
+            break;
+        case 13837: /* module 54 call 13 */
+        CHECK_ERROR(_readMethod_fueltanks_destroy_fuel_tank_V3(c, &method->basic.fueltanks_destroy_fuel_tank_V3))
+            break;
+        case 13838: /* module 54 call 14 */
+        CHECK_ERROR(_readMethod_fueltanks_force_create_fuel_tank_V3(c, &method->basic.fueltanks_force_create_fuel_tank_V3))
+            break;
+        case 13839: /* module 54 call 15 */
+        CHECK_ERROR(_readMethod_fueltanks_force_batch_add_account_V3(c, &method->basic.fueltanks_force_batch_add_account_V3))
+            break;
         case 64768: /* module 253 call 0 */
         CHECK_ERROR(_readMethod_multitokens_create_collection_V3(c, &method->basic.multitokens_create_collection_V3))
             break;
@@ -647,6 +832,8 @@ const char* _getMethod_ModuleName_V3(uint8_t moduleIdx)
             return STR_MO_BALANCES;
         case 50:
             return STR_MO_MARKETPLACE;
+        case 54:
+            return STR_MO_FUELTANKS;
         case 253:
             return STR_MO_MULTITOKENS;
         default:
@@ -687,6 +874,38 @@ const char* _getMethod_Name_V3(uint8_t moduleIdx, uint8_t callIdx)
             return STR_ME_FORCE_CREATE_LISTING;
         case 12807: /* module 50 call 7 */
             return STR_ME_FORCE_PLACE_BID;
+        case 13824: /* module 54 call 0 */
+            return STR_ME_CREATE_FUEL_TANK;
+        case 13825: /* module 54 call 1 */
+            return STR_ME_MUTATE_FUEL_TANK;
+        case 13826: /* module 54 call 2 */
+            return STR_ME_ADD_ACCOUNT;
+        case 13827: /* module 54 call 3 */
+            return STR_ME_REMOVE_ACCOUNT;
+        case 13828: /* module 54 call 4 */
+            return STR_ME_REMOVE_ACCOUNT_RULE_DATA;
+        case 13829: /* module 54 call 5 */
+            return STR_ME_DISPATCH;
+        case 13830: /* module 54 call 6 */
+            return STR_ME_DISPATCH_AND_TOUCH;
+        case 13831: /* module 54 call 7 */
+            return STR_ME_SCHEDULE_MUTATE_FREEZE_STATE;
+        case 13832: /* module 54 call 8 */
+            return STR_ME_INSERT_RULE_SET;
+        case 13833: /* module 54 call 9 */
+            return STR_ME_REMOVE_RULE_SET;
+        case 13834: /* module 54 call 10 */
+            return STR_ME_BATCH_ADD_ACCOUNT;
+        case 13835: /* module 54 call 11 */
+            return STR_ME_BATCH_REMOVE_ACCOUNT;
+        case 13836: /* module 54 call 12 */
+            return STR_ME_FORCE_SET_CONSUMPTION;
+        case 13837: /* module 54 call 13 */
+            return STR_ME_DESTROY_FUEL_TANK;
+        case 13838: /* module 54 call 14 */
+            return STR_ME_FORCE_CREATE_FUEL_TANK;
+        case 13839: /* module 54 call 15 */
+            return STR_ME_FORCE_BATCH_ADD_ACCOUNT;
         case 64768: /* module 253 call 0 */
             return STR_ME_CREATE_COLLECTION;
         case 64769: /* module 253 call 1 */
@@ -812,6 +1031,38 @@ uint8_t _getMethod_NumItems_V3(uint8_t moduleIdx, uint8_t callIdx)
             return 8;
         case 12807: /* module 50 call 7 */
             return 4;
+        case 13824: /* module 54 call 0 */
+            return 1;
+        case 13825: /* module 54 call 1 */
+            return 2;
+        case 13826: /* module 54 call 2 */
+            return 2;
+        case 13827: /* module 54 call 3 */
+            return 2;
+        case 13828: /* module 54 call 4 */
+            return 4;
+        case 13829: /* module 54 call 5 */
+            return 4;
+        case 13830: /* module 54 call 6 */
+            return 4;
+        case 13831: /* module 54 call 7 */
+            return 3;
+        case 13832: /* module 54 call 8 */
+            return 3;
+        case 13833: /* module 54 call 9 */
+            return 2;
+        case 13834: /* module 54 call 10 */
+            return 2;
+        case 13835: /* module 54 call 11 */
+            return 2;
+        case 13836: /* module 54 call 12 */
+            return 4;
+        case 13837: /* module 54 call 13 */
+            return 1;
+        case 13838: /* module 54 call 14 */
+            return 2;
+        case 13839: /* module 54 call 15 */
+            return 3;
         case 64768: /* module 253 call 0 */
             return 1;
         case 64769: /* module 253 call 1 */
@@ -1031,7 +1282,168 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
                 default:
                     return NULL;
             }
-            return STR_ME_FORCE_PLACE_BID;
+        case 13824: /* module 54 call 0 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_descriptor;
+                default:
+                    return NULL;
+            }
+        case 13825: /* module 54 call 1 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_mutation;
+                default:
+                    return NULL;
+            }
+        case 13826: /* module 54 call 2 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_user_id;
+                default:
+                    return NULL;
+            }
+        case 13827: /* module 54 call 3 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_user_id;
+                default:
+                    return NULL;
+            }
+        case 13828: /* module 54 call 4 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_user_id;
+                case 2:
+                    return STR_IT_rule_set_id;
+                case 3:
+                    return STR_IT_rule_kind;
+                default:
+                    return NULL;
+            }
+        case 13829: /* module 54 call 5 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_rule_set_id;
+                case 2:
+                    return STR_IT_call;
+                case 3:
+                    return STR_IT_settings;
+                default:
+                    return NULL;
+            }
+        case 13830: /* module 54 call 6 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_rule_set_id;
+                case 2:
+                    return STR_IT_call;
+                case 3:
+                    return STR_IT_settings;
+                default:
+                    return NULL;
+            }
+        case 13831: /* module 54 call 7 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_rule_set_id;
+                case 2:
+                    return STR_IT_is_frozen;
+                default:
+                    return NULL;
+            }
+        case 13832: /* module 54 call 8 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_rule_set_id;
+                case 2:
+                    return STR_IT_rules;
+                default:
+                    return NULL;
+            }
+        case 13833: /* module 54 call 9 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_rule_set_id;
+                default:
+                    return NULL;
+            }
+        case 13834: /* module 54 call 10 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_user_ids;
+                default:
+                    return NULL;
+            }
+        case 13835: /* module 54 call 11 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_user_ids;
+                default:
+                    return NULL;
+            }
+        case 13836: /* module 54 call 12 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                case 1:
+                    return STR_IT_user_id;
+                case 2:
+                    return STR_IT_rule_set_id;
+                case 3:
+                    return STR_IT_consumption;
+                default:
+                    return NULL;
+            }
+        case 13837: /* module 54 call 13 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_tank_id;
+                default:
+                    return NULL;
+            }
+        case 13838: /* module 54 call 14 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_owner;
+                case 1:
+                    return STR_IT_descriptor;
+                default:
+                    return NULL;
+            }
+        case 13839: /* module 54 call 15 */
+            switch (itemIdx) {
+                case 0:
+                    return STR_IT_owner;
+                case 1:
+                    return STR_IT_tank_id;
+                case 2:
+                    return STR_IT_user_ids;
+                default:
+                    return NULL;
+            }
         case 64768: /* module 253 call 0 */
             switch (itemIdx) {
                 case 0:
@@ -1671,6 +2083,291 @@ parser_error_t _getMethod_ItemValue_V3(
                 case 3: /* marketplace_force_place_bid_V3 - funds_backer */;
                     return _toStringOptionAccountIdLookupOfT(
                             &m->basic.marketplace_force_place_bid_V3.funds_backer,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13824: /* module 54 call 0 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_create_fuel_tank_V3 - descriptor */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_create_fuel_tank_V3.descriptor,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13825: /* module 54 call 1 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_mutate_fuel_tank_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_mutate_fuel_tank_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_mutate_fuel_tank_V3 - mutation */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_mutate_fuel_tank_V3.mutation,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13826: /* module 54 call 2 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_add_account_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_add_account_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_add_account_V3 - user_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_add_account_V3.user_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13827: /* module 54 call 3 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_remove_account_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_account_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_remove_account_V3 - user_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_account_V3.user_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13828: /* module 54 call 4 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_remove_account_rule_data_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_account_rule_data_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_remove_account_rule_data_V3 - user_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_account_rule_data_V3.user_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* fueltanks_remove_account_rule_data_V3 - rule_set_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_account_rule_data_V3.rule_set_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 3: /* fueltanks_remove_account_rule_data_V3 - rule_kind */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_account_rule_data_V3.rule_kind,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13829: /* module 54 call 5 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_dispatch_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_dispatch_V3 - rule_set_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_V3.rule_set_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* fueltanks_dispatch_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_V3.call,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 3: /* fueltanks_dispatch_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_V3.settings,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13830: /* module 54 call 6 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_dispatch_and_touch_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_and_touch_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_dispatch_and_touch_V3 - rule_set_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_and_touch_V3.rule_set_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* fueltanks_dispatch_and_touch_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_and_touch_V3.call,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 3: /* fueltanks_dispatch_and_touch_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_dispatch_and_touch_V3.settings,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13831: /* module 54 call 7 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_schedule_mutate_freeze_state_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_schedule_mutate_freeze_state_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_schedule_mutate_freeze_state_V3 - rule_set_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_schedule_mutate_freeze_state_V3.rule_set_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* fueltanks_schedule_mutate_freeze_state_V3 - is_frozen */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_schedule_mutate_freeze_state_V3.is_frozen,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13832: /* module 54 call 8 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_insert_rule_set_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_insert_rule_set_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_insert_rule_set_V3 - rule_set_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_insert_rule_set_V3.rule_set_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* fueltanks_insert_rule_set_V3 - rules */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_insert_rule_set_V3.rules,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13833: /* module 54 call 9 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_remove_rule_set_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_rule_set_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_remove_rule_set_V3 - rule_set_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_remove_rule_set_V3.rule_set_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13834: /* module 54 call 10 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_batch_add_account_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_batch_add_account_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_batch_add_account_V3 - user_ids */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_batch_add_account_V3.user_ids,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13835: /* module 54 call 11 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_batch_remove_account_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_batch_remove_account_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_batch_remove_account_V3 - user_ids */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_batch_remove_account_V3.user_ids,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13836: /* module 54 call 12 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_force_set_consumption_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_set_consumption_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_force_set_consumption_V3 - user_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_set_consumption_V3.user_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* fueltanks_force_set_consumption_V3 - rule_set_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_set_consumption_V3.rule_set_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 3: /* fueltanks_force_set_consumption_V3 - consumption */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_set_consumption_V3.consumption,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13837: /* module 54 call 13 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_destroy_fuel_tank_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_destroy_fuel_tank_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13838: /* module 54 call 14 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_force_create_fuel_tank_V3 - owner */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_create_fuel_tank_V3.owner,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_force_create_fuel_tank_V3 - descriptor */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_create_fuel_tank_V3.descriptor,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                default:
+                    return parser_no_data;
+            }
+        case 13839: /* module 54 call 15 */
+            switch (itemIdx) {
+                case 0: /* fueltanks_force_batch_add_account_V3 - owner */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_batch_add_account_V3.owner,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 1: /* fueltanks_force_batch_add_account_V3 - tank_id */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_batch_add_account_V3.tank_id,
+                            outValue, outValueLen,
+                            pageIdx, pageCount);
+                case 2: /* fueltanks_force_batch_add_account_V3 - user_ids */;
+                    return _toStringCollectionDescriptor(
+                            &m->basic.fueltanks_force_batch_add_account_V3.user_ids,
                             outValue, outValueLen,
                             pageIdx, pageCount);
                 default:
