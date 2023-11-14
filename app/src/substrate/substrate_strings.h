@@ -21,6 +21,7 @@ extern "C" {
 
 // Modules names
 static const char* STR_MO_BALANCES = "Balances";
+static const char* STR_MO_FUELTANKS = "Fueltanks";
 static const char* STR_MO_MARKETPLACE = "Marketplace";
 static const char* STR_MO_MULTITOKENS = "Multitokens";
 
@@ -94,6 +95,22 @@ static const char* STR_ME_SET_STATE = "Set state";
 static const char* STR_ME_SET_CONFIGS = "Set configs";
 static const char* STR_ME_WITHDRAW = "Withdraw";
 static const char* STR_ME_EDIT = "Edit";
+static const char* STR_ME_CREATE_FUEL_TANK = "Create fuel tank";
+static const char* STR_ME_MUTATE_FUEL_TANK = "Mutate fuel tank";
+static const char* STR_ME_ADD_ACCOUNT = "Add account";
+static const char* STR_ME_REMOVE_ACCOUNT = "Remove account";
+static const char* STR_ME_REMOVE_ACCOUNT_RULE_DATA = "Remove account rule data";
+static const char* STR_ME_DISPATCH = "Dispatch";
+static const char* STR_ME_DISPATCH_AND_TOUCH = "Dispatch and touch";
+static const char* STR_ME_SCHEDULE_MUTATE_FREEZE_STATE = "Schedule mutate freeze state";
+static const char* STR_ME_INSERT_RULE_SET = "Insert rule set";
+static const char* STR_ME_REMOVE_RULE_SET = "Remove rule set";
+static const char* STR_ME_BATCH_ADD_ACCOUNT = "Batch add account";
+static const char* STR_ME_BATCH_REMOVE_ACCOUNT = "Batch remove account";
+static const char* STR_ME_FORCE_SET_CONSUMPTION = "Force set consumption";
+static const char* STR_ME_DESTROY_FUEL_TANK = "Destroy fuel tank";
+static const char* STR_ME_FORCE_CREATE_FUEL_TANK = "Force create fuel tank";
+static const char* STR_ME_FORCE_BATCH_ADD_ACCOUNT = "Force batch add account";
 
 // Items names
 static const char* STR_IT_code = "Code";
@@ -252,6 +269,15 @@ static const char* STR_IT_take_asset_id = "Take asset id";
 static const char* STR_IT_price = "Price";
 static const char* STR_IT_salt = "Salt";
 static const char* STR_IT_auction_data = "Auction data";
+static const char* STR_IT_tank_id = "Tank id";
+static const char* STR_IT_user_id = "User id";
+static const char* STR_IT_rule_set_id = "Rule set id";
+static const char* STR_IT_rule_kind = "Rule kind";
+static const char* STR_IT_settings = "Settings";
+static const char* STR_IT_is_frozen = "Is frozen";
+static const char* STR_IT_rules = "Rules";
+static const char* STR_IT_user_ids = "User ids";
+static const char* STR_IT_consumption = "Consumption";
 
 #ifdef __cplusplus
 }

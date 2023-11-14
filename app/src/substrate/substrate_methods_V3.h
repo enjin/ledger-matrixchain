@@ -31,6 +31,7 @@ extern "C" {
 #endif
 
 #define PD_CALL_BALANCES_V3 10
+#define PD_CALL_FUELTANKS_V3 54
 #define PD_CALL_MARKETPLACE_V3 50
 #define PD_CALL_MULTITOKENS_V3 253
 
@@ -64,6 +65,111 @@ typedef struct {
     pd_AccountIdLookupOfT_t dest;
     pd_CompactBalance_t amount;
 } pd_balances_transfer_V3_t;
+
+#define PD_CALL_FUELTANKS_ADD_ACCOUNT_V3 2
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_AccountIdLookupOfT_t user_id;
+} pd_fueltanks_add_account_V3_t;
+
+#define PD_CALL_FUELTANKS_BATCH_ADD_ACCOUNT_V3 10
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_AccountIdLookupOfT_t user_ids;
+} pd_fueltanks_batch_add_account_V3_t;
+
+#define PD_CALL_FUELTANKS_BATCH_REMOVE_ACCOUNT_V3 11
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_AccountIdLookupOfT_t user_ids;
+} pd_fueltanks_batch_remove_account_V3_t;
+
+#define PD_CALL_FUELTANKS_CREATE_FUEL_TANK_V3 0
+typedef struct {
+    pd_FuelTankDescriptorOf_t descriptor;
+} pd_fueltanks_create_fuel_tank_V3_t;
+
+#define PD_CALL_FUELTANKS_DESTROY_FUEL_TANK_V3 13
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+} pd_fueltanks_destroy_fuel_tank_V3_t;
+
+#define PD_CALL_FUELTANKS_DISPATCH_V3 5
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_u32_t rule_set_id;
+    pd_Call_t call;
+    pd_OptionDispatchSettings settings;
+} pd_fueltanks_dispatch_V3_t;
+
+#define PD_CALL_FUELTANKS_DISPATCH_AND_TOUCH_V3 6
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_u32_t rule_set_id;
+    pd_Call_t call;
+    pd_OptionDispatchSettings settings;
+} pd_fueltanks_dispatch_and_touch_V3_t;
+
+#define PD_CALL_FUELTANKS_FORCE_BATCH_ADD_ACCOUNT_V3 15
+typedef struct {
+    pd_AccountIdLookupOfT_t owner;
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_AccountIdLookupOfT_t user_ids;
+} pd_fueltanks_force_batch_add_account_V3_t;
+
+#define PD_CALL_FUELTANKS_FORCE_CREATE_FUEL_TANK_V3 14
+typedef struct {
+    pd_AccountIdLookupOfT_t owner;
+    pd_FuelTankDescriptorOf_t descriptor;
+} pd_fueltanks_force_create_fuel_tank_V3_t;
+
+#define PD_CALL_FUELTANKS_FORCE_SET_CONSUMPTION_V3 12
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_AccountIdLookupOfT_t user_id;
+    pd_u32_t rule_set_id;
+    pd_ConsumptionOf_t consumption;
+} pd_fueltanks_force_set_consumption_V3_t;
+
+#define PD_CALL_FUELTANKS_INSERT_RULE_SET_V3 8
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_u32_t rule_set_id;
+    pd_RuleSetOf_t rules;
+} pd_fueltanks_insert_rule_set_V3_t;
+
+#define PD_CALL_FUELTANKS_MUTATE_FUEL_TANKS_V3 1
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_FuelTankMutationOf_t mutation;
+} pd_fueltanks_mutate_fuel_tank_V3_t;
+
+#define PD_CALL_FUELTANKS_REMOVE_ACCOUNT_V3 3
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_AccountIdLookupOfT_t user_id;
+} pd_fueltanks_remove_account_V3_t;
+
+#define PD_CALL_FUELTANKS_REMOVE_ACCOUNT_RULE_DATA_V3 4
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_AccountIdLookupOfT_t user_id;
+    pd_u32_t rule_set_id;
+    pd_DispatchRuleKind_t rule_kind;
+} pd_fueltanks_remove_account_rule_data_V3_t;
+
+#define PD_CALL_FUELTANKS_REMOVE_RULE_SET_V3 9
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_u32_t rule_set_id;
+} pd_fueltanks_remove_rule_set_V3_t;
+
+#define PD_CALL_FUELTANKS_SCHEDULE_MUTATE_FREEZE_STATE_V3 7
+typedef struct {
+    pd_AccountIdLookupOfT_t tank_id;
+    pd_Optionu32_t rule_set_id;
+    pd_bool_t is_frozen;
+} pd_fueltanks_schedule_mutate_freeze_state_V3_t;
 
 #define PD_CALL_MARKETPLACE_CREATE_LISTING_V3 0
 typedef struct {
@@ -380,6 +486,22 @@ typedef union {
     pd_balances_force_transfer_V3_t balances_force_transfer_V3;
     pd_balances_transfer_keep_alive_V3_t balances_transfer_keep_alive_V3;
     pd_balances_transfer_V3_t balances_transfer_V3;
+    pd_fueltanks_add_account_V3_t fueltanks_add_account_V3;
+    pd_fueltanks_batch_add_account_V3_t fueltanks_batch_add_account_V3;
+    pd_fueltanks_batch_remove_account_V3_t fueltanks_batch_remove_account_V3;
+    pd_fueltanks_create_fuel_tank_V3_t fueltanks_create_fuel_tank_V3;
+    pd_fueltanks_destroy_fuel_tank_V3_t fueltanks_destroy_fuel_tank_V3;
+    pd_fueltanks_dispatch_V3_t fueltanks_dispatch_V3;
+    pd_fueltanks_dispatch_and_touch_V3_t fueltanks_dispatch_and_touch_V3;
+    pd_fueltanks_force_batch_add_account_V3_t fueltanks_force_batch_add_account_V3;
+    pd_fueltanks_force_create_fuel_tank_V3_t fueltanks_force_create_fuel_tank_V3;
+    pd_fueltanks_force_set_consumption_V3_t fueltanks_force_set_consumption_V3;
+    pd_fueltanks_insert_rule_set_V3_t fueltanks_insert_rule_set_V3;
+    pd_fueltanks_mutate_fuel_tank_V3_t fueltanks_mutate_fuel_tank_V3;
+    pd_fueltanks_remove_account_V3_t fueltanks_remove_account_V3;
+    pd_fueltanks_remove_account_rule_data_V3_t fueltanks_remove_account_rule_data_V3;
+    pd_fueltanks_remove_rule_set_V3_t fueltanks_remove_rule_set_V3;
+    pd_fueltanks_schedule_mutate_freeze_state_V3_t fueltanks_schedule_mutate_freeze_state_V3;
     pd_marketplace_cancel_listing_V3_t marketplace_cancel_listing_V3;
     pd_marketplace_create_listing_V3_t marketplace_create_listing_V3;
     pd_marketplace_fill_listing_V3_t marketplace_fill_listing_V3;
