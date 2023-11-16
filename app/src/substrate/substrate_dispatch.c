@@ -95,13 +95,3 @@ bool _getMethod_ItemIsExpert(uint32_t transactionVersion, uint8_t moduleIdx, uin
         return false;
     }
 }
-
-bool _getMethod_IsNestingSupported(uint32_t transactionVersion, uint8_t moduleIdx, uint8_t callIdx)
-{
-    switch (transactionVersion) {
-    case 3:
-        return _getMethod_IsNestingSupported_V3(moduleIdx, callIdx);
-    default:
-        return false;
-    }
-}

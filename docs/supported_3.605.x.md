@@ -13,6 +13,40 @@
 | Upgrade accounts       |                    | :heavy_check_mark: | :heavy_check_mark: |         | `VecAccountId`who<br/>                                                                  |
 | Force set balance      |                    | :heavy_check_mark: | :heavy_check_mark: |         | `AccountIdLookupOfT`who<br/>`CompactBalance`new_free<br/>                               |
 
+## FuelTanks
+
+| Name                         | Nano S | Nano S XL | Nano SP/X - Stax | Nesting | Arguments |
+|------------------------------|--------|-----------|------------------|---------|-----------|
+| Add account                  |        |           |                  |         |           |
+| Batch add account            |        |           |                  |         |           |
+| Batch remove account         |        |           |                  |         |           |
+| Create fuel tank             |        |           |                  |         |           |
+| Destroy fuel tank            |        |           |                  |         |           |
+| Dispatch                     |        |           |                  |         |           |
+| Dispatch and touch           |        |           |                  |         |           |
+| Force batch add account      |        |           |                  |         |           |
+| Force create fuel tank       |        |           |                  |         |           |
+| Force set consumption        |        |           |                  |         |           |
+| Insert rule set              |        |           |                  |         |           |
+| Mutate fuel tank             |        |           |                  |         |           |
+| Remove account               |        |           |                  |         |           |
+| Remove account rule data     |        |           |                  |         |           |
+| Remove rule set              |        |           |                  |         |           |
+| Schedule mutate freeze state |        |           |                  |         |           |
+
+## Marketplace
+
+| Name                         | Nano S | Nano S XL | Nano SP/X - Stax | Nesting | Arguments |
+|------------------------------|--------|-----------|------------------|---------|-----------|
+| Cancel listing               |        |           |                  |         |           |
+| Create listing               |        |           |                  |         |           |
+| Fill listing                 |        |           |                  |         |           |
+| Finalize auction             |        |           |                  |         |           |
+| Force create listing         |        |           |                  |         |           |
+| Force place bid              |        |           |                  |         |           |
+| Place bid                    |        |           |                  |         |           |
+| Set protocol fee             |        |           |                  |         |           |
+
 ## MultiTokens
 
 | Name                         | Nano S             | Nano S XL          | Nano SP/X - Stax   | Nesting | Arguments                                                                                                                                                           |
@@ -51,3 +85,5 @@
 | Transfer                     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |         | `AccountIdLookupOfT`recipient<br/>`CollectionId`collectionId<br/>`TransferParamsOf`params<br/>                                                                     |
 | Unapprove collection         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collectionId<br/>`AccountId`operator<br/>                                                                                                            |
 | Unapprove token              | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collectionId<br/>`TokenId`token_id<br/>`AccountId`operator<br/>                                                                                      |
+
+
