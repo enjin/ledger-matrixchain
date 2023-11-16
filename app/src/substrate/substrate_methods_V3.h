@@ -75,13 +75,13 @@ typedef struct {
 #define PD_CALL_FUELTANKS_BATCH_ADD_ACCOUNT_V3 10
 typedef struct {
     pd_AccountIdLookupOfT_t tank_id;
-    pd_AccountIdLookupOfT_t user_ids;
+    pd_VecAccountIdLookupOfT_t user_ids;
 } pd_fueltanks_batch_add_account_V3_t;
 
 #define PD_CALL_FUELTANKS_BATCH_REMOVE_ACCOUNT_V3 11
 typedef struct {
     pd_AccountIdLookupOfT_t tank_id;
-    pd_AccountIdLookupOfT_t user_ids;
+    pd_VecAccountIdLookupOfT_t user_ids;
 } pd_fueltanks_batch_remove_account_V3_t;
 
 #define PD_CALL_FUELTANKS_CREATE_FUEL_TANK_V3 0
@@ -99,7 +99,7 @@ typedef struct {
     pd_AccountIdLookupOfT_t tank_id;
     pd_u32_t rule_set_id;
     pd_Call_t call;
-    pd_OptionDispatchSettings settings;
+    pd_OptionDispatchSettings_t settings;
 } pd_fueltanks_dispatch_V3_t;
 
 #define PD_CALL_FUELTANKS_DISPATCH_AND_TOUCH_V3 6
@@ -107,14 +107,14 @@ typedef struct {
     pd_AccountIdLookupOfT_t tank_id;
     pd_u32_t rule_set_id;
     pd_Call_t call;
-    pd_OptionDispatchSettings settings;
+    pd_OptionDispatchSettings_t settings;
 } pd_fueltanks_dispatch_and_touch_V3_t;
 
 #define PD_CALL_FUELTANKS_FORCE_BATCH_ADD_ACCOUNT_V3 15
 typedef struct {
     pd_AccountIdLookupOfT_t owner;
     pd_AccountIdLookupOfT_t tank_id;
-    pd_AccountIdLookupOfT_t user_ids;
+    pd_VecAccountIdLookupOfT_t user_ids;
 } pd_fueltanks_force_batch_add_account_V3_t;
 
 #define PD_CALL_FUELTANKS_FORCE_CREATE_FUEL_TANK_V3 14
@@ -126,7 +126,7 @@ typedef struct {
 #define PD_CALL_FUELTANKS_FORCE_SET_CONSUMPTION_V3 12
 typedef struct {
     pd_AccountIdLookupOfT_t tank_id;
-    pd_AccountIdLookupOfT_t user_id;
+    pd_OptionAccountIdLookupOfT_t user_id;
     pd_u32_t rule_set_id;
     pd_ConsumptionOf_t consumption;
 } pd_fueltanks_force_set_consumption_V3_t;
@@ -135,7 +135,7 @@ typedef struct {
 typedef struct {
     pd_AccountIdLookupOfT_t tank_id;
     pd_u32_t rule_set_id;
-    pd_RuleSetOf_t rules;
+    pd_VecDispatchRuleDescriptor_t rules;
 } pd_fueltanks_insert_rule_set_V3_t;
 
 #define PD_CALL_FUELTANKS_MUTATE_FUEL_TANKS_V3 1

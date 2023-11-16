@@ -2520,6 +2520,31 @@ parser_error_t _readTokenIdOf(parser_context_t* c, pd_TokenIdOf_t* v)
     return _readTokenId(c, &v->value);
 }
 
+parser_error_t _readFuelTankDescriptorOf(parser_context_t* c, pd_FuelTankDescriptorOf_t* v)
+{
+}
+
+parser_error_t _readOptionDispatchSettings(parser_context_t* c, pd_OptionDispatchSettings_t* v)
+{
+}
+
+parser_error_t _readConsumptionOf(parser_context_t* c, pd_ConsumptionOf_t* v)
+{
+}
+
+parser_error_t _readVecDispatchRuleDescriptor(parser_context_t* c, pd_VecDispatchRuleDescriptor_t* v)
+{
+}
+
+parser_error_t _readFuelTankMutationOf(parser_context_t* c, pd_FuelTankMutationOf_t* v)
+{
+}
+
+parser_error_t _readDispatchRuleKind(parser_context_t* c, pd_DispatchRuleKind_t* v)
+{
+}
+
+
 ///////////////////////////////////
 ///////////////////////////////////
 ///////////////////////////////////

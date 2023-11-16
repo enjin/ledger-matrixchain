@@ -64,7 +64,7 @@ __Z_INLINE parser_error_t _readMethod_balances_transfer_V3(
 }
 
 __Z_INLINE parser_error_t _readMethod_fueltanks_add_account_V3(
-        parser_context_t* c, pd_fueltanks_add_acount_V3_t* m)
+        parser_context_t* c, pd_fueltanks_add_account_V3_t* m)
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->user_id))
@@ -153,7 +153,7 @@ __Z_INLINE parser_error_t _readMethod_fueltanks_insert_rule_set_V3(
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
     CHECK_ERROR(_readu32(c, &m->rule_set_id))
-    CHECK_ERROR(_readVecRuleDescriptorsOf(c, &m->rules))
+    CHECK_ERROR(_readVecDispatchRuleDescriptor(c, &m->rules))
     return parser_ok;
 }
 
@@ -161,7 +161,7 @@ __Z_INLINE parser_error_t _readMethod_fueltanks_mutate_fuel_tank_V3(
         parser_context_t* c, pd_fueltanks_mutate_fuel_tank_V3_t* m)
 {
     CHECK_ERROR(_readAccountIdLookupOfT(c, &m->tank_id))
-    CHECK_ERROR(_readDefaultTankMutation(c, &m->mutation))
+    CHECK_ERROR(_readFuelTankMutationOf(c, &m->mutation))
     return parser_ok;
 }
 
